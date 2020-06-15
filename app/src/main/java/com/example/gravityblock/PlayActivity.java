@@ -2,12 +2,12 @@ package com.example.gravityblock;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +22,8 @@ public class PlayActivity extends AppCompatActivity {
     private ImageView rotateRightButton;
     private ImageView homeButton;
     private ImageView restartButton;
+    private ImageView chooseLevelButton;
+    private ImageView settingsButton;
 
     private Level currentLevel;
     private int levelNum;
@@ -31,267 +33,6 @@ public class PlayActivity extends AppCompatActivity {
     private SquareColor redSquare = new SquareColor(R.color.redSquareColor, R.drawable.red_square_background);
     private SquareColor yellowSquare = new SquareColor(R.color.yellowSquareColor, R.drawable.yellow_square_background);
 
-    //List of the levels
-//    private Level[] levels = new Level[]{
-//            //Level 0
-//            new Level(
-//                    //Walls
-//                    new Wall[]{
-//                            new Wall(0, 0, 10, 1, this),
-//                            new Wall(0, 0, 1, 10, this),
-//                            new Wall(9, 0, 1, 10, this),
-//                            new Wall(0, 9, 10, 1, this),
-//                            new Wall(1, 3, 2, 1, this),
-//                            new Wall(5, 1, 1, 8, this),
-//                            new Wall(6, 3, 2, 1, this)
-//                    },
-//
-//                    //Squares
-//                    new Square[]{
-//                            new Square(1, 1, 1, 8, redSquare, this),
-//                            new Square(6, 1, 6, 8, yellowSquare, this),
-//                            //new Square(3, 6, 0, 0, redSquare, this),
-//                            //new Square(6, 4, 0, 0, redSquare, this)
-//                    },
-//
-//                    //Size
-//                    10,
-//
-//                    //Context
-//                    this
-//            ),
-//            //Level 1
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                    {
-//                        new Wall (0, 0, 6, 1, this),
-//                        new Wall (0, 1, 1, 4, this),
-//                        new Wall (2, 1, 2, 3, this),
-//                        new Wall (5, 1, 1, 5, this),
-//                        new Wall (0, 5, 5, 1, this),
-//                    },
-//                    //Squares
-//                    new Square[]{
-//                        new Square(1, 1, 4, 1, redSquare, this)
-//                    },
-//                    //Size
-//                    6,
-//                    //Context
-//                    this
-//            ),
-//
-//            //Level 2
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                    {
-//                        new Wall (0, 0, 1, 6, this),
-//                        new Wall (1, 0, 5, 1, this),
-//                        new Wall (5, 1, 1, 5, this),
-//                        new Wall (1, 3, 1, 1, this),
-//                        new Wall (4, 4, 1, 1, this),
-//                        new Wall (1, 5, 4, 1, this)
-//                    },
-//                    //Squares
-//                    new Square[]{
-//                            new Square(1, 1, 1, 4, redSquare, this)
-//                    },
-//                    //Size
-//                    6,
-//                    //Context
-//                    this
-//            ),
-//
-//            //Level 3
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                            {
-//                                    new Wall (0, 0, 1, 6, this),
-//                                    new Wall (1, 0, 5, 1, this),
-//                                    new Wall (5, 1, 1, 5, this),
-//                                    new Wall (1, 5, 4, 1, this),
-//                                    new Wall (2, 1, 1, 3, this),
-//                                    new Wall (3, 3, 1, 1, this)
-//                            },
-//                    //Squares
-//                    new Square[]{
-//                            new Square(1, 1, 3, 2, redSquare, this)
-//                    },
-//                    //Size
-//                    6,
-//                    //Context
-//                    this
-//            ),
-//
-//            //Level 4
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                            {
-//                                    new Wall (0, 0, 1, 6, this),
-//                                    new Wall (1, 0, 5, 1, this),
-//                                    new Wall (5, 1, 1, 5, this),
-//                                    new Wall (1, 5, 4, 1, this),
-//                                    new Wall (1, 1, 2, 1, this),
-//                                    new Wall (1, 3, 1, 1, this),
-//                                    new Wall (4, 2, 1, 1, this)
-//                            },
-//                    //Squares
-//                    new Square[]{
-//                            new Square(1, 4, 4, 1, redSquare, this)
-//                    },
-//                    //Size
-//                    6,
-//                    //Context
-//                    this
-//            ),
-//
-//            //Level 5
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                            {
-//                                    new Wall (0, 0, 1, 6, this),
-//                                    new Wall (1, 0, 5, 1, this),
-//                                    new Wall (5, 1, 1, 5, this),
-//                                    new Wall (1, 5, 4, 1, this),
-//                                    new Wall (1, 2, 1, 1, this),
-//                                    new Wall (2, 3, 1, 1, this),
-//                                    new Wall (4, 4, 1, 1, this)
-//                            },
-//                    //Squares
-//                    new Square[]{
-//                            new Square(1, 1, 1, 3, redSquare, this)
-//                    },
-//                    //Size
-//                    6,
-//                    //Context
-//                    this
-//            ),
-//
-//            //Level 6
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                            {
-//                                    new Wall (0, 0, 10, 1, this),
-//                                    new Wall (0, 1, 1, 8, this),
-//                                    new Wall (0, 9, 10, 1, this),
-//                                    new Wall (9, 1, 1, 8, this),
-//                                    new Wall (1, 2, 1, 1, this),
-//                                    new Wall (4, 2, 3, 1, this),
-//                                    new Wall (3, 3, 1, 1, this),
-//                                    new Wall (7, 3, 1, 1, this),
-//                                    new Wall (1, 5, 1, 1, this),
-//                                    new Wall (3, 5, 1, 2, this),
-//                                    new Wall (6, 6, 1, 1, this),
-//                                    new Wall (8, 6, 1, 1, this),
-//                                    new Wall (2, 7, 1, 2, this),
-//                                    new Wall (8, 8, 1, 1, this)
-//                            },
-//                    //Squares
-//                    new Square[]{
-//                            new Square(1, 1, 1, 8, redSquare, this)
-//                    },
-//                    //Size
-//                    10,
-//                    //Context
-//                    this
-//            ),
-//
-//            //Level 7
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                            {
-//                                    new Wall (0, 0, 10, 1, this),
-//                                    new Wall (0, 1, 1, 8, this),
-//                                    new Wall (0, 9, 10, 1, this),
-//                                    new Wall (9, 1, 1, 8, this),
-//                                    new Wall (2, 2, 2, 1, this),
-//                                    new Wall (7, 1, 2, 1, this),
-//                                    new Wall (6, 2, 1, 1, this),
-//                                    new Wall (8, 2, 1, 1, this),
-//                                    new Wall (5, 3, 1, 1, this),
-//                                    new Wall (1, 5, 1, 1, this),
-//                                    new Wall (4, 6, 2, 1, this),
-//                                    new Wall (5, 5, 1, 1, this),
-//                                    new Wall (8, 7, 1, 1, this),
-//                                    new Wall (2, 8, 1, 1, this),
-//                                    new Wall (8, 5, 1, 1, this)
-//                            },
-//                    //Squares
-//                    new Square[]{
-//                            new Square(5, 4, 7, 2, redSquare, this)
-//                    },
-//                    //Size
-//                    10,
-//                    //Context
-//                    this
-//            ),
-//
-//            //Level 8
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                            {
-//                                    new Wall (0, 0, 10, 1, this),
-//                                    new Wall (0, 1, 1, 8, this),
-//                                    new Wall (0, 9, 10, 1, this),
-//                                    new Wall (9, 1, 1, 8, this),
-//                                    new Wall (2, 1, 1, 2, this),
-//                                    new Wall (5, 1, 1, 1, this),
-//                                    new Wall (8, 2, 1, 1, this),
-//                                    new Wall (4, 3, 1, 1, this),
-//                                    new Wall (5, 5, 1, 3, this),
-//                                    new Wall (2, 6, 1, 1, this),
-//                                    new Wall (6, 6, 1, 1, this),
-//                                    new Wall (8, 6, 1, 1, this),
-//                                    new Wall (2, 8, 1, 1, this)
-//                            },
-//                    //Squares
-//                    new Square[]{
-//                            new Square(8, 8, 1, 1, redSquare, this)
-//                    },
-//                    //Size
-//                    10,
-//                    //Context
-//                    this
-//            ),
-//
-//            //Level 9
-//            new Level(
-//                    //Walls
-//                    new Wall[]
-//                            {
-//                                    new Wall (0, 0, 10, 1, this),
-//                                    new Wall (0, 1, 1, 8, this),
-//                                    new Wall (0, 9, 10, 1, this),
-//                                    new Wall (9, 1, 1, 8, this),
-//                                    new Wall (3, 1, 1, 1, this),
-//                                    new Wall (6, 1, 1, 1, this),
-//                                    new Wall (1, 4, 1, 1, this),
-//                                    new Wall (4, 5, 1, 1, this),
-//                                    new Wall (3, 6, 1, 1, this),
-//                                    new Wall (8, 6, 1, 1, this),
-//                                    new Wall (5, 7, 1, 1, this),
-//                                    new Wall (3, 8, 1, 1, this),
-//                                    new Wall (3, 4, 1, 1, this)
-//                            },
-//                    //Squares
-//                    new Square[]{
-//                            new Square(4, 4, 3, 5, redSquare, this)
-//                    },
-//                    //Size
-//                    10,
-//                    //Context
-//                    this
-//            ),
-//
-//
-//    };
 
 
     Runnable afterRotation = new Runnable() {
@@ -328,8 +69,10 @@ public class PlayActivity extends AppCompatActivity {
         rotateLeftButton = (ImageView) findViewById(R.id.rotateLeftButton);
         rotateRightButton = (ImageView) findViewById(R.id.rotateRightButton);
 
-        homeButton = (ImageView) findViewById(R.id.chooseLevelHomeButton);
+        homeButton = (ImageView) findViewById(R.id.playHomeButton);
         restartButton = (ImageView) findViewById(R.id.restartLevelButton);
+        chooseLevelButton = (ImageView) findViewById(R.id.playChooseLevelButton);
+        settingsButton = (ImageView) findViewById(R.id.playSettingsButton);
 
         Bundle b = getIntent().getExtras();
         levelNum = b.getInt("levelNum");
@@ -387,6 +130,20 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
+        chooseLevelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchActivity(ChooseLevel.class);
+            }
+        });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchActivity(SettingsActivity.class);
+            }
+        });
+
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -394,6 +151,12 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void launchActivity(Class c) {
+
+        Intent intent = new Intent(this, c);
+        startActivity(intent);
+        finish();
     }
     private void showNextLevelDialog(){
         final Context c = this;

@@ -74,26 +74,88 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/chooseLevelHomeButton"
+        android:id="@+id/playHomeButton"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
         android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/dividerL"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/home_icon" />
 
     <ImageView
+        android:id="@+id/playChooseLevelButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorAccent"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/divider"
+        app:layout_constraintStart_toEndOf="@+id/dividerL"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/choose_level_icon" />
+
+    <ImageView
+        android:id="@+id/playSettingsButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorAccent"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/dividerR"
+        app:layout_constraintStart_toEndOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cog_icon" />
+
+    <ImageView
         android:id="@+id/restartLevelButton"
         android:layout_width="64dp"
         android:layout_height="64dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dividerR"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/restart_icon" />
+
+    <View
+        android:id="@+id/dividerL"
+        android:layout_width="1dp"
+        android:layout_height="715dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/listDivider"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dividerR"
+        android:layout_width="1dp"
+        android:layout_height="715dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/listDivider"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

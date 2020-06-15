@@ -7,34 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".ChooseLevel">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Choose Level"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/chooseLevelHomeButton"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/colorAccent"
         android:padding="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/home_icon" />
+
+    <ImageView
+        android:id="@+id/chooseLevelSettingsButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorAccent"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/chooseLevelHomeButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cog_icon" />
 
     <RelativeLayout
         android:id="@+id/chooseLevelButtonLayout"
@@ -52,9 +47,6 @@
 
 
     </RelativeLayout>
-
-
-
 
 
 </android.support.constraint.ConstraintLayout>

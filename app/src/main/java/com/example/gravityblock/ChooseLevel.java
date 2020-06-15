@@ -1,8 +1,6 @@
 package com.example.gravityblock;
 
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -18,6 +16,7 @@ public class ChooseLevel extends AppCompatActivity {
     private Button[] buttons;
 
     private ImageView homeButton;
+    private ImageView settingsButton;
 
     int screenHeight;
     int screenWidth;
@@ -42,6 +41,7 @@ public class ChooseLevel extends AppCompatActivity {
 
 
         homeButton = (ImageView) findViewById(R.id.chooseLevelHomeButton);
+        settingsButton = (ImageView) findViewById(R.id.chooseLevelSettingsButton);
 
 
         levelButtonLayout = findViewById(R.id.chooseLevelButtonLayout);
@@ -81,8 +81,20 @@ public class ChooseLevel extends AppCompatActivity {
                 finish();
             }
         });
-    }
 
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchActivity(SettingsActivity.class);
+            }
+        });
+    }
+    private void launchActivity(Class c) {
+
+        Intent intent = new Intent(this, c);
+        startActivity(intent);
+        finish();
+    }
     private void launchPlayActivity(int levelNum) {
 
         Intent intent = new Intent(this, PlayActivity.class);
