@@ -27,7 +27,6 @@ public class Movablock extends Fallable{
         this.Width = m.Width;
     }
 
-    @Override
     public void setView(RelativeLayout container){
         float dpValue = context.getResources().getDisplayMetrics().density;
 

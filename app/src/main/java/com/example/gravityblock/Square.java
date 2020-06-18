@@ -44,17 +44,22 @@ public class Square extends Fallable {
         this.color = s.color;
     }
 
-    @Override
-    public void setView(RelativeLayout container){
+    public void setSquareView(RelativeLayout container){
         float dpValue = context.getResources().getDisplayMetrics().density;
 
         view = new View(context);
-        goal = new View(context);
 
         RelativeLayout.LayoutParams squareLayout = new RelativeLayout.LayoutParams((int) (Level.squareSize * dpValue), (int) (Level.squareSize * dpValue));
         squareLayout.setMargins((int) (X * dpValue * Level.squareSize), (int) (Y * dpValue * Level.squareSize), 0, 0);
         view.setLayoutParams(squareLayout);
         view.setBackground(context.getResources().getDrawable(color.squareBackground));
+
+        container.addView(view);
+    }
+    public void setGoalView(RelativeLayout container){
+        float dpValue = context.getResources().getDisplayMetrics().density;
+
+        goal = new View(context);
 
         RelativeLayout.LayoutParams goalLayout = new RelativeLayout.LayoutParams((int) (Level.squareSize * dpValue), (int) (Level.squareSize * dpValue));
         goalLayout.setMargins((int) (goalX * dpValue * Level.squareSize), (int) (goalY * dpValue * Level.squareSize), 0, 0);
@@ -63,7 +68,6 @@ public class Square extends Fallable {
         goal.setBackgroundColor(context.getResources().getColor(color.colorInt));
 
         container.addView(goal);
-        container.addView(view);
     }
 
     public boolean onGoal(){

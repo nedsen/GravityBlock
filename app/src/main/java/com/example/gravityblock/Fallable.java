@@ -21,7 +21,7 @@ public abstract class Fallable {
 
     public long fallTime;
 
-    public abstract  void setView(RelativeLayout container);
+    //public abstract  void setView(RelativeLayout container);
 
     public void setX(int newx, int delay){
         int g = 6000 * Level.squareSize;  //larger g = less gravity

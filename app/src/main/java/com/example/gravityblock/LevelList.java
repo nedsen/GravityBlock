@@ -564,5 +564,127 @@ public class LevelList {
                     //Size
                     10
             ),
+            //Level 20
+            new Level(
+                    //Walls
+                    new Wall[]{
+                            new Wall (0, 0, 10, 1),
+                            new Wall (0, 0, 1, 10),
+                            new Wall (0, 9, 10, 1),
+                            new Wall (9, 0, 1, 10),
+                            new Wall (4, 0, 1, 2),
+                            new Wall (3, 2, 1, 1),
+                            new Wall (5, 2, 1, 2),
+                            new Wall (8, 2, 2, 1),
+                            new Wall (7, 3, 1, 1),
+                            new Wall (3, 4, 1, 1),
+                            new Wall (2, 5, 1, 1),
+                            new Wall (8, 5, 2, 1),
+                            new Wall (7, 6, 1, 1),
+                            new Wall (3, 7, 2, 1),
+                    },
+
+                    //Squares
+                    new Square[]{
+                            new Square(1, 8, 4, 2, redSquare),
+                    },
+                    //movablocks
+                    new Movablock[]{
+                            new Movablock(2, 4, 1, 1)
+                    },
+
+                    //Size
+                    10
+            ),
+            //Level 21
+            new Level(
+                    //Walls
+                    new Wall[]{
+                            new Wall (0, 0, 10, 1),
+                            new Wall (0, 0, 1, 10),
+                            new Wall (0, 9, 10, 1),
+                            new Wall (9, 0, 1, 10),
+                            new Wall (0, 2, 2, 1),
+                            new Wall (7, 0, 3, 2),
+                            new Wall (3, 4, 1, 1),
+                            new Wall (2, 5, 1, 1),
+                            new Wall (6, 5, 1, 1),
+                            new Wall (3, 6, 1, 1),
+                            new Wall (0, 8, 3, 2),
+                            new Wall (7, 8, 1, 2),
+                    },
+
+                    //Squares
+                    new Square[]{
+                            new Square(1, 1, 1, 7, redSquare),
+                            new Square(3, 5, 3, 8, yellowSquare),
+                    },
+                    //movablocks
+                    new Movablock[0],
+
+                    //Size
+                    10
+            ),
+            //Level 22
+            new Level(
+                    //Walls
+                    new Wall[]{
+                            new Wall (0, 0, 10, 1),
+                            new Wall (0, 0, 1, 10),
+                            new Wall (0, 9, 10, 1),
+                            new Wall (9, 0, 1, 10),
+                            new Wall (0, 0, 4, 2),
+                            new Wall (0, 3, 2, 1),
+                            new Wall (8, 2, 2, 1),
+                            new Wall (4, 3, 1, 1),
+                            new Wall (8, 4, 2, 1),
+                            new Wall (8, 6, 2, 1),
+                            new Wall (7, 7, 1, 1),
+                            new Wall (3, 8, 1, 2),
+                    },
+
+                    //Squares
+                    new Square[]{
+                            new Square(1, 8, 8, 5, redSquare),
+                            new Square(8, 8, 8, 1, yellowSquare),
+                    },
+                    //movablocks
+                    new Movablock[0],
+
+                    //Size
+                    10
+            ),
+            //Level 23
+            new Level(
+                    //Walls
+                    new Wall[]{
+                            new Wall (0, 0, 10, 1),
+                            new Wall (0, 0, 1, 10),
+                            new Wall (0, 9, 10, 1),
+                            new Wall (9, 0, 1, 10),
+                            new Wall (4, 0, 3, 2),
+                            new Wall (4, 1, 2, 2),
+                            new Wall (4, 2, 1, 2),
+                            new Wall (3, 3, 2, 1),
+                            new Wall (0, 3, 2, 2),
+                            new Wall (6, 3, 1, 2),
+                            new Wall (8, 3, 2, 1),
+                            new Wall (4, 5, 1, 2),
+                            new Wall (2, 6, 3, 1),
+                            new Wall (2, 8, 2, 2),
+                            new Wall (7, 7, 1, 3),
+                    },
+
+                    //Squares
+                    new Square[]{
+                            new Square(3, 2, 6, 2, redSquare),
+                            new Square(8, 2, 1, 2, yellowSquare),
+                    },
+                    //movablocks
+                    new Movablock[0],
+
+                    //Size
+                    10
+            ),
     };
 }

@@ -119,7 +119,10 @@ public class Level {
         }
 
         for(Square s : squares){
-            s.setView(l);
+            s.setGoalView(l);
+        }
+        for(Square s : squares){
+            s.setSquareView(l);
         }
         for(Movablock m : movablocks){
             m.setView(l);
