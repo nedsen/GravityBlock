@@ -17,6 +17,10 @@ public abstract class Fallable {
 
     public View view;
 
+    public View backView;
+
+    public boolean hasBackView;
+
     Context context;
 
     public long fallTime;
@@ -28,15 +32,24 @@ public abstract class Fallable {
         int s = Math.abs(newx - X);
         fallTime = (long) Math.sqrt( g * s);
 
-
-
         this.X = newx;
         float dpValue = context.getResources().getDisplayMetrics().density;
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationX", (newx - startX) * dpValue * Level.squareSize);
         animator.setInterpolator(new AccelerateInterpolator());
         animator.setStartDelay(delay);
         animator.setDuration(fallTime);
-        animator.start();
+
+        if(hasBackView){
+            ObjectAnimator backAnimator = ObjectAnimator.ofFloat(backView, "translationX", (newx - startX) * dpValue * Level.squareSize);
+            backAnimator.setInterpolator(new AccelerateInterpolator());
+            backAnimator.setStartDelay(delay);
+            backAnimator.setDuration(fallTime);
+            animator.start();
+            backAnimator.start();
+        }
+        else {
+            animator.start();
+        }
     }
     public void setY(int newy, int delay){
         int g = 6000 * Level.squareSize;  //larger g = less gravity
@@ -50,7 +63,18 @@ public abstract class Fallable {
         animator.setInterpolator(new AccelerateInterpolator());
         animator.setStartDelay(delay);
         animator.setDuration(fallTime);
-        animator.start();
+
+        if(hasBackView){
+            ObjectAnimator backAnimator = ObjectAnimator.ofFloat(backView, "translationY", (newy - startY) * dpValue * Level.squareSize);
+            backAnimator.setInterpolator(new AccelerateInterpolator());
+            backAnimator.setStartDelay(delay);
+            backAnimator.setDuration(fallTime);
+            animator.start();
+            backAnimator.start();
+        }
+        else {
+            animator.start();
+        }
     }
 
     public void setContext(Context c) {

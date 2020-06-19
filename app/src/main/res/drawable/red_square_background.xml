@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="30dp"
+    android:height="30dp"
+    android:viewportWidth="30"
+    android:viewportHeight="30">
+    <group>
+    <path
+        android:fillColor="@color/squareBackColor"
+        android:pathData="M 15,0 L 30,0 30,30 0,30 0,0 15,0 15,3
+                            A 12,12 0 0,0 15,27
+                            A 12,12 0 0,0 15,3 z"/>
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="@color/redSquareColor"
+        android:pathData="M 15,3 A 12,12 0 1,1 15,27 A 12,12 0 1,1 15,3 z"
+        />
+    </group>
+</vector>
+<!--
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <vector
     <item>
-        <shape android:shape="rectangle">
-            <solid android:color="#000000" />
-        </shape>
+        <vector
+
+
     </item>
     <item android:bottom="2dp"
         android:right="2dp"
@@ -15,4 +35,4 @@
                 android:color="@color/redSquareColor"/>
         </shape>
     </item>
-</layer-list>
+</layer-list>!-->

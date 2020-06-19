@@ -117,7 +117,9 @@ public class Level {
         for(Wall w : walls){
             w.setWallView(l);
         }
-
+        for(Square s : squares){
+            s.setSquareBackView(l);
+        }
         for(Square s : squares){
             s.setGoalView(l);
         }

@@ -11,8 +11,10 @@
     <color name = "wallColor">#9206EE</color>
     <color name="mazeBackground">#91BED1</color>
 
+    <color name="squareBackColor">#000000</color>
     <color name="redSquareColor">#D81B1B</color>
     <color name="yellowSquareColor">#E9E61A</color>
+    <color name="greenSquareColor">#2D9704</color>
 
     <color name="movablockColor">#BBBBBB</color>
 
