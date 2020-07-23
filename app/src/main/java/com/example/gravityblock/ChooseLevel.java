@@ -1,6 +1,9 @@
 package com.example.gravityblock;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -8,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import static com.example.gravityblock.MainActivity.LEVEL;
+import static com.example.gravityblock.MainActivity.SHARED_PREFS;
 
 public class ChooseLevel extends AppCompatActivity {
 
@@ -28,6 +34,11 @@ public class ChooseLevel extends AppCompatActivity {
     int buttonSpacing = 16;
 
 
+
+
+    public int levelUpTo;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +50,15 @@ public class ChooseLevel extends AppCompatActivity {
         screenWidth = displayMetrics.widthPixels;
         dpValue = getResources().getDisplayMetrics().density;
 
+        //Check What level the user is up to
+        loadLevelUpTo();
 
         homeButton = (ImageView) findViewById(R.id.chooseLevelHomeButton);
         settingsButton = (ImageView) findViewById(R.id.chooseLevelSettingsButton);
 
 
         levelButtonLayout = findViewById(R.id.chooseLevelButtonLayout);
+
         int layoutWidth = levelButtonLayout.getWidth();
 
         float buttonSize = (float)(screenWidth - 3 * leftRightMargins - 6 * buttonSpacing) / (float)(5);
@@ -57,15 +71,19 @@ public class ChooseLevel extends AppCompatActivity {
             RelativeLayout.LayoutParams bParams = new RelativeLayout.LayoutParams((int)buttonSize * (int)(dpValue), (int)buttonSize * (int)(dpValue));
             int x = i % 5;
             int y = i / 5;
-            bParams.setMargins((int)(((i % 5) * (buttonSpacing + buttonSize) + buttonSpacing)) * (int)(dpValue), (int)(((i / 5) * (buttonSpacing + buttonSize) + buttonSpacing)) * (int)(dpValue), 0, 0);
+            bParams.setMargins((int)(((i % 5) * (buttonSpacing + buttonSize) + buttonSpacing)) * (int)(dpValue), (int)(((i / 5) * (buttonSpacing + buttonSize) + buttonSpacing)) * (int)(dpValue), buttonSpacing, buttonSpacing);
 
             b.setLayoutParams(bParams);
 
+            if(i > levelUpTo - 1){
+                b.setBackgroundColor(getResources().getColor(R.color.unclickableLevelColor));
+                b.setTextColor(getResources().getColor(R.color.unclickableTextColor));
+            }
             buttons[i] = b;
             levelButtonLayout.addView(b);
         }
 
-        for(int i = 0; i < numLevels; i ++){
+        for(int i = 0; i < levelUpTo; i ++){
             final int levelNum = i + 1;
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,6 +106,7 @@ public class ChooseLevel extends AppCompatActivity {
                 launchActivity(SettingsActivity.class);
             }
         });
+
     }
     private void launchActivity(Class c) {
 
@@ -102,6 +121,12 @@ public class ChooseLevel extends AppCompatActivity {
 
         startActivity(intent);
         finish();
+    }
+
+    public void loadLevelUpTo(){
+        SharedPreferences sps = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        levelUpTo = sps.getInt(LEVEL, 1);
     }
 
 }

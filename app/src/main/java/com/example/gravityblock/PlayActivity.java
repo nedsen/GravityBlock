@@ -3,6 +3,7 @@ package com.example.gravityblock;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
@@ -12,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import static com.example.gravityblock.MainActivity.LEVEL;
+import static com.example.gravityblock.MainActivity.SHARED_PREFS;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -30,16 +34,14 @@ public class PlayActivity extends AppCompatActivity {
 
     //private LevelList levels= new LevelList(this);
     //The different square colors
-    private SquareColor redSquare = new SquareColor(R.color.redSquareColor, R.drawable.red_square_background);
-    private SquareColor yellowSquare = new SquareColor(R.color.yellowSquareColor, R.drawable.yellow_square_background);
+    //private SquareColor redSquare = new SquareColor(R.color.redSquareColor, R.drawable.red_square_background);
+    //private SquareColor yellowSquare = new SquareColor(R.color.yellowSquareColor, R.drawable.yellow_square_background);
 
 
 
     Runnable afterRotation = new Runnable() {
         @Override
         public void run() {
-
-
             if(currentLevel.passed()){
                 Handler g = new Handler();
                 g.postDelayed(new Runnable() {
@@ -49,6 +51,15 @@ public class PlayActivity extends AppCompatActivity {
                     }
                 }, 500);
 
+                SharedPreferences sps = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+                int levelUpTo = sps.getInt(LEVEL, 1);
+
+                //Increse the level up to if needed
+                if(levelNum + 1 > levelUpTo){
+                    SharedPreferences.Editor spsEdit = sps.edit();
+                    spsEdit.putInt(LEVEL, levelNum + 1);
+                    spsEdit.apply();
+                }
 
             }
             else{

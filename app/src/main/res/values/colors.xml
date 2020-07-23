@@ -16,6 +16,9 @@
     <color name="yellowSquareColor">#E9E61A</color>
     <color name="greenSquareColor">#2D9704</color>
 
+    <color name="unclickableLevelColor">#77D81B1B</color>
+    <color name="unclickableTextColor">#77000000</color>
+
     <color name="movablockColor">#BBBBBB</color>
 
 </resources>

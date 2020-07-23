@@ -1,6 +1,8 @@
 package com.example.gravityblock;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,16 +21,32 @@ public class MainActivity extends AppCompatActivity {
     private ImageView purpleBottom;
     private ImageView purpleTop;
 
+    public static final String SHARED_PREFS = "GBSPs";
+    public static final String LEVEL = "Level";
+
+    private int levelUpTo;
+
+    private int numLevels = LevelList.Levels.length - 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sps = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        levelUpTo = sps.getInt(LEVEL, 1);
+
         playButton = (Button) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchPlayActivity(0);
+                if(levelUpTo != numLevels) {
+                    launchPlayActivity(levelUpTo);
+                }
+                else{
+                    launchPlayActivity(1);
+                }
             }
         });
 
@@ -65,4 +83,5 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
 }
