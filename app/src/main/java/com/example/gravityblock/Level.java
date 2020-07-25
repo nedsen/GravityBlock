@@ -29,6 +29,30 @@ public class Level {
 
     public boolean[][] occupied;
 
+    public int minMoves;
+
+    public String levelText;
+
+    public static final String[] LEVEL_UNLOCKED_STRINGS = new String[]{
+            "L0U",
+            "L1U", "L2U", "L3U", "L4U", "L5U",
+            "L6U", "L7U", "L8U", "L9U", "L10U",
+            "L11U", "L12U", "L13U", "L14U", "L15U",
+            "L16U", "L17U", "L18U", "L19U", "L20U",
+            "L21U", "L22U", "L23U", "L24U", "L25U",
+            "L26U", "L27U", "L28U", "L29U", "L30U",
+    };
+    public static final String[] LEVEL_COMPLETED_STRINGS = new String[]{
+            "L0C",
+            "L1C", "L2C", "L3C", "L4C", "L5C",
+            "L6C", "L7C", "L8C", "L9C", "L10C",
+            "L11C", "L12C", "L13C", "L14C", "L15C",
+            "L16C", "L17C", "L18C", "L19C", "L20C",
+            "L21C", "L22C", "L23C", "L24C", "L25C",
+            "L26C", "L27C", "L28C", "L29C", "L30C",
+    };
+    public static final String LEVEL_SAVED_PREFERENCES = "GBLevelSP";
+
     /*public Level(Wall[] w, Square[] s, int sz){
         walls = w;
         squares = s;
@@ -53,12 +77,41 @@ public class Level {
         }
     }*/
 
-    public Level(Wall[] w, Square[] s, Movablock[] m, int sz){
+    public Level(Wall[] w, Square[] s, Movablock[] m, int sz, int mm){
         walls = w;
         squares = s;
         movablocks = m;
+        minMoves = mm;
 
         size = sz;
+
+        levelText = " ";
+
+        currentRotation = 0;
+
+        occupied = new boolean[sz][sz];
+        for(int i = 0; i < sz; i ++){
+            for(int j = 0; j < sz; j ++){
+                occupied[i][j] =false;
+            }
+        }
+        for(Wall wall : walls){
+            for(int i = wall.X; i < wall.X + wall.Width; i ++){
+                for(int j = wall.Y; j < wall.Y + wall.Height; j++){
+                    occupied[i][j] = true;
+                }
+            }
+        }
+    }
+
+    public Level(Wall[] w, Square[] s, Movablock[] m, int sz, int mm, String lText){
+        walls = w;
+        squares = s;
+        movablocks = m;
+        minMoves = mm;
+
+        size = sz;
+        levelText = lText;
 
         currentRotation = 0;
 
@@ -89,6 +142,8 @@ public class Level {
         }
 
         this.size = l.size;
+        this.minMoves = l.minMoves;
+        this.levelText = l.levelText;
 
         occupied = new boolean[size][size];
         for(int i = 0; i < size; i ++){

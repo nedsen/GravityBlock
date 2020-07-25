@@ -19,6 +19,8 @@
     <color name="unclickableLevelColor">#77D81B1B</color>
     <color name="unclickableTextColor">#77000000</color>
 
+    <color name="completedTextColor">#C5B800</color>
+
     <color name="movablockColor">#BBBBBB</color>
 
 </resources>

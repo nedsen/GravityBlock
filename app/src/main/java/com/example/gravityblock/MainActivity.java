@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sps = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        final SharedPreferences sps = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
         levelUpTo = sps.getInt(LEVEL, 1);
 
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                levelUpTo = sps.getInt(LEVEL, 1);
                 if(levelUpTo != numLevels) {
                     launchPlayActivity(levelUpTo);
                 }

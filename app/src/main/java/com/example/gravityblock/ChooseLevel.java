@@ -3,6 +3,7 @@ package com.example.gravityblock;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,8 +37,6 @@ public class ChooseLevel extends AppCompatActivity {
 
 
 
-    public int levelUpTo;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +49,7 @@ public class ChooseLevel extends AppCompatActivity {
         screenWidth = displayMetrics.widthPixels;
         dpValue = getResources().getDisplayMetrics().density;
 
-        //Check What level the user is up to
-        loadLevelUpTo();
+
 
         homeButton = (ImageView) findViewById(R.id.chooseLevelHomeButton);
         settingsButton = (ImageView) findViewById(R.id.chooseLevelSettingsButton);
@@ -74,24 +72,37 @@ public class ChooseLevel extends AppCompatActivity {
             bParams.setMargins((int)(((i % 5) * (buttonSpacing + buttonSize) + buttonSpacing)) * (int)(dpValue), (int)(((i / 5) * (buttonSpacing + buttonSize) + buttonSpacing)) * (int)(dpValue), buttonSpacing, buttonSpacing);
 
             b.setLayoutParams(bParams);
+            b.setTypeface(b.getTypeface(), Typeface.BOLD);
 
-            if(i > levelUpTo - 1){
+            SharedPreferences sharedPreferences = this.getSharedPreferences(Level.LEVEL_SAVED_PREFERENCES, Context.MODE_PRIVATE);
+            boolean unlocked;
+            if(i < 5){
+                unlocked = sharedPreferences.getBoolean(Level.LEVEL_UNLOCKED_STRINGS[i + 1], true);
+            }
+            else {
+                unlocked = sharedPreferences.getBoolean(Level.LEVEL_UNLOCKED_STRINGS[i + 1], false);
+            }
+            if(!unlocked){
                 b.setBackgroundColor(getResources().getColor(R.color.unclickableLevelColor));
                 b.setTextColor(getResources().getColor(R.color.unclickableTextColor));
             }
+            boolean completed = sharedPreferences.getBoolean(Level.LEVEL_COMPLETED_STRINGS[i + 1], false);
+            if(completed){
+                b.setTextColor(getResources().getColor(R.color.completedTextColor));
+            }
             buttons[i] = b;
             levelButtonLayout.addView(b);
+            if(unlocked){
+                final int levelNum = i + 1;
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        launchPlayActivity(levelNum);
+                    }
+                });
+            }
         }
 
-        for(int i = 0; i < levelUpTo; i ++){
-            final int levelNum = i + 1;
-            buttons[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    launchPlayActivity(levelNum);
-                }
-            });
-        }
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,10 +134,5 @@ public class ChooseLevel extends AppCompatActivity {
         finish();
     }
 
-    public void loadLevelUpTo(){
-        SharedPreferences sps = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-
-        levelUpTo = sps.getInt(LEVEL, 1);
-    }
 
 }

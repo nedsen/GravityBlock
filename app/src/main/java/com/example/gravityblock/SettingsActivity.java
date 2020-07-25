@@ -53,6 +53,18 @@ public class SettingsActivity extends AppCompatActivity {
                 numText.setText(String.valueOf(number));
                 spsEdit.putInt(LEVEL, number);
                 spsEdit.apply();
+
+                SharedPreferences spsActual = getSharedPreferences(Level.LEVEL_SAVED_PREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor spsEditActual = spsActual.edit();
+                for(int i = 1; i < 6; i++) {
+                    spsEditActual.putBoolean(Level.LEVEL_COMPLETED_STRINGS[i], false);
+                    spsEditActual.putBoolean(Level.LEVEL_UNLOCKED_STRINGS[i], true);
+                }
+                for(int i = 6; i < Level.LEVEL_UNLOCKED_STRINGS.length; i++){
+                    spsEditActual.putBoolean(Level.LEVEL_COMPLETED_STRINGS[i], false);
+                    spsEditActual.putBoolean(Level.LEVEL_UNLOCKED_STRINGS[i], false);
+                }
+                spsEditActual.apply();
             }
         });
         loadNumber();
