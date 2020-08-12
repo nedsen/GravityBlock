@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, PlayActivity.class);
         intent.putExtra("levelNum", levelNum);
+        intent.putExtra("origin", Origins.HOME);
 
         startActivity(intent);
     }

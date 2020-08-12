@@ -1,5 +1,6 @@
 package com.example.gravityblock;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +35,8 @@ public class ChooseLevel extends AppCompatActivity {
     int leftRightMargins = 16;
     int buttonSpacing = 16;
 
+    public static Activity chooseLevelActivity;
+
 
 
 
@@ -42,6 +45,9 @@ public class ChooseLevel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_level);
+
+        //Make Variable so that the activity can be closed from another activity
+        chooseLevelActivity = this;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -88,6 +94,10 @@ public class ChooseLevel extends AppCompatActivity {
             }
             boolean completed = sharedPreferences.getBoolean(Level.LEVEL_COMPLETED_STRINGS[i + 1], false);
             if(completed){
+                b.setBackgroundResource(R.drawable.completed_level_background);
+            }
+            boolean minMoves = sharedPreferences.getBoolean(Level.LEVEL_MIN_MOVES_STRINGS[i + 1], false);
+            if(minMoves){
                 b.setTextColor(getResources().getColor(R.color.completedTextColor));
             }
             buttons[i] = b;
@@ -123,16 +133,16 @@ public class ChooseLevel extends AppCompatActivity {
 
         Intent intent = new Intent(this, c);
         startActivity(intent);
-        finish();
     }
     private void launchPlayActivity(int levelNum) {
 
         Intent intent = new Intent(this, PlayActivity.class);
         intent.putExtra("levelNum", levelNum);
+        intent.putExtra("origin", Origins.CHOOSE_LEVEL);
 
         startActivity(intent);
-        finish();
     }
+
 
 
 }

@@ -51,6 +51,15 @@ public class Level {
             "L21C", "L22C", "L23C", "L24C", "L25C",
             "L26C", "L27C", "L28C", "L29C", "L30C",
     };
+    public static final String[] LEVEL_MIN_MOVES_STRINGS = new String[]{
+            "L0M",
+            "L1M", "L2M", "L3M", "L4M", "L5M",
+            "L6M", "L7M", "L8M", "L9M", "L10M",
+            "L11M", "L12M", "L13M", "L14M", "L15M",
+            "L16M", "L17M", "L18M", "L19M", "L20M",
+            "L21M", "L22M", "L23M", "L24M", "L25M",
+            "L26M", "L27M", "L28M", "L29M", "L30M",
+    };
     public static final String LEVEL_SAVED_PREFERENCES = "GBLevelSP";
 
     /*public Level(Wall[] w, Square[] s, int sz){

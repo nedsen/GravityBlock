@@ -57,10 +57,12 @@ public class SettingsActivity extends AppCompatActivity {
                 SharedPreferences spsActual = getSharedPreferences(Level.LEVEL_SAVED_PREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor spsEditActual = spsActual.edit();
                 for(int i = 1; i < 6; i++) {
+                    spsEditActual.putBoolean(Level.LEVEL_MIN_MOVES_STRINGS[i], false);
                     spsEditActual.putBoolean(Level.LEVEL_COMPLETED_STRINGS[i], false);
                     spsEditActual.putBoolean(Level.LEVEL_UNLOCKED_STRINGS[i], true);
                 }
                 for(int i = 6; i < Level.LEVEL_UNLOCKED_STRINGS.length; i++){
+                    spsEditActual.putBoolean(Level.LEVEL_COMPLETED_STRINGS[i], false);
                     spsEditActual.putBoolean(Level.LEVEL_COMPLETED_STRINGS[i], false);
                     spsEditActual.putBoolean(Level.LEVEL_UNLOCKED_STRINGS[i], false);
                 }

@@ -43,6 +43,8 @@ public class PlayActivity extends AppCompatActivity {
 
     private int numMoves;
 
+    public int activityOrigin;
+
     //private LevelList levels= new LevelList(this);
     //The different square colors
     //private SquareColor redSquare = new SquareColor(R.color.redSquareColor, R.drawable.red_square_background);
@@ -67,28 +69,19 @@ public class PlayActivity extends AppCompatActivity {
                 SharedPreferences.Editor spsEdit2 = sps.edit();
                 //spsEdit.putBoolean(Level.LEVEL_COMPLETED_STRINGS[3], true);
 
-                Log.e("L1", String.valueOf(sps.getBoolean(Level.LEVEL_COMPLETED_STRINGS[1], false)));
-                Log.e("L2", String.valueOf(sps.getBoolean(Level.LEVEL_COMPLETED_STRINGS[2], false)));
-                Log.e("L3", String.valueOf(sps.getBoolean(Level.LEVEL_COMPLETED_STRINGS[3], false)));
-                Log.e("L4", String.valueOf(sps.getBoolean(Level.LEVEL_COMPLETED_STRINGS[4], false)));
-                Log.e("L5", String.valueOf(sps.getBoolean(Level.LEVEL_COMPLETED_STRINGS[5], false)));
-                Log.e("L6", String.valueOf(sps.getBoolean(Level.LEVEL_COMPLETED_STRINGS[6], false)));
-
                 boolean completed = sps.getBoolean(Level.LEVEL_COMPLETED_STRINGS[levelNum], false);
                 if(!completed){
                     spsEdit1.putBoolean(Level.LEVEL_COMPLETED_STRINGS[levelNum], true);
                     spsEdit1.apply();
                     int completeInRow = 0;
                     int levelRow = ((levelNum - 1) / 5);
-                    Log.e("LevelRow", String.valueOf(levelRow + 1));
                     for(int i = 0; i < 5; i ++){
                         boolean c = sps.getBoolean(Level.LEVEL_COMPLETED_STRINGS[5 * levelRow + i + 1], false);
                         if(c){
                             completeInRow ++;
                         }
                     }
-                    Log.e("Complete in row", String.valueOf(completeInRow));
-                    if(completeInRow >= 3){
+                    if(completeInRow == 3){
                         for(int i = 0; i < 5; i++){
                             spsEdit2.putBoolean(Level.LEVEL_UNLOCKED_STRINGS[5 * (levelRow) + i + 6], true);
                             spsEdit2.apply();
@@ -96,6 +89,14 @@ public class PlayActivity extends AppCompatActivity {
                             newLevelsToast.show();
                         }
                     }
+                }
+
+                SharedPreferences.Editor spsEditMinMoves = sps.edit();
+
+                boolean minMoves = sps.getBoolean(Level.LEVEL_MIN_MOVES_STRINGS[levelNum], false);
+                if(!minMoves && numMoves <= currentLevel.minMoves){
+                    spsEditMinMoves.putBoolean(Level.LEVEL_MIN_MOVES_STRINGS[levelNum], true);
+                    spsEditMinMoves.apply();
                 }
                 //int levelUpTo = sps.getInt(LEVEL, 1);
 
@@ -137,6 +138,8 @@ public class PlayActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         levelNum = b.getInt("levelNum");
         levelNumText.setText("Level " + String.valueOf(levelNum));
+
+        activityOrigin = b.getInt("origin");
 
         currentLevel = Level.setLevelContext(LevelList.Levels[levelNum], this);
         currentLevel.setLayout(gameLayout);
@@ -195,14 +198,14 @@ public class PlayActivity extends AppCompatActivity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                goHome();
             }
         });
 
         chooseLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchActivity(ChooseLevel.class);
+                goToChooseLevel();
             }
         });
 
@@ -225,7 +228,6 @@ public class PlayActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, c);
         startActivity(intent);
-        finish();
     }
     private void showNextLevelDialog(){
         final Context c = this;
@@ -287,7 +289,7 @@ public class PlayActivity extends AppCompatActivity {
                 }
                 else if(levelNum == LevelList.Levels.length){
                     //Toast
-                    Toast notAvailableToast = Toast.makeText(getApplicationContext(), "Last level: the nest level is not yet available", Toast.LENGTH_LONG);
+                    Toast notAvailableToast = Toast.makeText(getApplicationContext(), "Last level: the next level is not yet available", Toast.LENGTH_LONG);
                 }
             }
         });
@@ -317,12 +319,20 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
+        Button dialogChooseLevelButton = (Button) nextLevelDialog.findViewById(R.id.DialogChooseLevelButton);
+        dialogChooseLevelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToChooseLevel();
+            }
+        });
+
 
         Button homeButton = (Button) nextLevelDialog.findViewById(R.id.dialogHomeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                goHome();
             }
         });
 
@@ -343,6 +353,10 @@ public class PlayActivity extends AppCompatActivity {
 
                 gameLayout.removeAllViews();
                 gameLayout.setRotation(0);
+
+                //Set number of Moves to 0
+                numMoves = 0;
+                movesText.setText("Moves: " + String.valueOf(numMoves));
 
                 //Set the current level to the new level number
                 currentLevel = Level.setLevelContext(LevelList.Levels[levelNum], c);
@@ -366,5 +380,24 @@ public class PlayActivity extends AppCompatActivity {
 
         restartDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         restartDialog.show();
+    }
+
+    private void goHome(){
+        if(activityOrigin == Origins.CHOOSE_LEVEL){
+            ChooseLevel.chooseLevelActivity.finish();
+        }
+        finish();
+    }
+    private void goToChooseLevel(){
+        if(activityOrigin == Origins.CHOOSE_LEVEL){
+            ChooseLevel.chooseLevelActivity.finish();
+        }
+        Intent intent = new Intent(this, ChooseLevel.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.ltr_enter, R.anim.no_transition);
+        finishAfterTransition();
+    }
+    private void goToSettings(){
+        launchActivity(SettingsActivity.class);
     }
 }
