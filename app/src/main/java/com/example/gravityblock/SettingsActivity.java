@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
                     spsEditActual.putBoolean(Level.LEVEL_UNLOCKED_STRINGS[i], true);
                 }
                 for(int i = 6; i < Level.LEVEL_UNLOCKED_STRINGS.length; i++){
-                    spsEditActual.putBoolean(Level.LEVEL_COMPLETED_STRINGS[i], false);
+                    spsEditActual.putBoolean(Level.LEVEL_MIN_MOVES_STRINGS[i], false);
                     spsEditActual.putBoolean(Level.LEVEL_COMPLETED_STRINGS[i], false);
                     spsEditActual.putBoolean(Level.LEVEL_UNLOCKED_STRINGS[i], false);
                 }

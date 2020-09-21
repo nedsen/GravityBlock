@@ -259,7 +259,13 @@ public class PlayActivity extends AppCompatActivity {
                 //Go to Next Level if it is unlocked
                 SharedPreferences sps = getSharedPreferences(Level.LEVEL_SAVED_PREFERENCES, Context.MODE_PRIVATE);
 
-                boolean unlocked = sps.getBoolean(Level.LEVEL_UNLOCKED_STRINGS[levelNum + 1], false);
+                boolean unlocked;
+                if(levelNum < 5){
+                    unlocked = sps.getBoolean(Level.LEVEL_UNLOCKED_STRINGS[levelNum + 1], true);
+                }
+                else {
+                    unlocked = sps.getBoolean(Level.LEVEL_UNLOCKED_STRINGS[levelNum + 1], false);
+                }
 
                 if(levelNum < LevelList.Levels.length - 1 && unlocked) {
                     levelNum++;
